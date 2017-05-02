@@ -24,6 +24,7 @@ To run the model, first copy the files from the protein folder you wish to simul
 The ``Solve.jl`` script has several user inputs available:
 
 Variable | User Input | Description
+--- | --- | ---
 Case | 1 = Amino Acid Uptake & Synthesis, 2 = Amino Acid Uptake w/o Synthesis, 3 = Amino Acid Synthesis w/o Uptake | Set the case to simulate
 Promoter_model	| 1 = T7 promoter model, 2 = P70a promoter model | Set the promoter model
 plasmid_concentration	| default = 5, plasmid concentration is in nM | Set plasmid concentration of the protein of interest to be expressed
@@ -31,6 +32,7 @@ plasmid_concentration	| default = 5, plasmid concentration is in nM | Set plasmi
 The script gives several outputs:
 
 Output | Description
+--- | ---
 objective__value | The objective value of the reaction set to be optimized. The default is set to optimize the export of the protein of interest
 flux_array | The flux distribution throughout the network. The reaction index can be looked up in Debug.txt
 dual_array | Shadow cost
@@ -43,7 +45,6 @@ exit_flag | Status of glpk solver. Solution undefined = 1, solution is feasible 
 
 file | description
 --- | ---
-
 DataDictionary.jl | Encodes the species and reaction bounds arrays and the objective array. Data is stored in a [Julia dictionary](http://docs.julialang.org/en/stable/stdlib/collections/?highlight=dict#Base.Dict) type and can be accessed through the appropriate key.
 Debug.txt | List of reactions and species used to generate the model code.
 FluxDriver.jl | Julia interface with the [GLPK](https://github.com/JuliaOpt/GLPK.jl) solver. Users should `NEVER, UNDER ANY CIRCUMSTANCES, EVER` edit this file.
