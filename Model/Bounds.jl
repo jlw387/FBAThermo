@@ -1,4 +1,4 @@
-function Bounds(DF::AbstractString,TXTL::AbstractString)
+function Bounds(DF,TXTL)
 
   FB = DF["default_flux_bounds_array"]
 
