@@ -38,7 +38,6 @@ flux_array | The flux distribution throughout the network. The reaction index ca
 dual_array | Shadow cost
 uptake_array | Species array
 exit_flag | Status of glpk solver. Solution undefined = 1, solution is feasible = 2, problem has no feasible solution = 4, solution is optimal = 5
-(objective_value, flux_array, dual_array, uptake_array, exit_flag)
 
 
 #### What each file does
