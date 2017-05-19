@@ -1,5 +1,5 @@
 ## Sequence Specific Flux Balance Analysis (ssFBA) for Cell-Free Protein Synthesis
-ssFBA is a sequence specific constraint based model for static stoichiometric models (SSM) written in the [Julia](http://julialang.org) programming language.
+Sequence specific constraint based model (ssFBA) for static stoichiometric models (SSM) written in the [Julia](http://julialang.org) programming language.
 SSM models were created with JuNQC-Generator (https://github.com/varnerlab/JuNQC-Generator).
 The code uses the GLPK solver to solve the metabolic flux balance analysis program.
 
@@ -53,3 +53,4 @@ Solve.jl | Default top-level driver implementation.
 Bounds.jl | Updates the species and reaction bounds and sets the transcription and translation rates.
 TXTLDictionary.jl | Encodes the cell-free protein synthesis parameters. Data is stored in a [Julia dictionary](http://docs.julialang.org/en/stable/stdlib/collections/?highlight=dict#Base.Dict) type and can be accessed through the appropriate key.
 Performance.jl | Evaluates the carbon yield, energy efficiency, and productivity of a protein of interest.
+Ensemble.jl | Generates an ensemble of solutions for a range of transcription and translation parameters
