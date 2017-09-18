@@ -67,3 +67,6 @@ while index <= runs
     index = index+1;
   end
 end
+
+flux_array = flux_ensemble
+include("Performance.jl")
