@@ -1,7 +1,10 @@
 ## Sequence Specific Flux Balance Analysis (ssFBA) for Cell-Free Protein Synthesis
 Sequence specific constraint based model (ssFBA) for static stoichiometric models (SSM) written in the [Julia](http://julialang.org) programming language.
 SSM models were created with JuNQC-Generator (https://github.com/varnerlab/JuNQC-Generator).
-The code uses the GLPK solver to solve the metabolic flux balance analysis program.
+The code uses the GLPK solver to solve the metabolic flux balance analysis program. The model is described in:
+
+[Vilkhovoy et al (2017) Sequence Specific Modeling of E. coli Cell-Free Protein Synthesis.
+bioRxiv 139774; doi: https://doi.org/10.1101/139774](https://www.biorxiv.org/content/early/2017/12/28/139774)
 
 ### Installation and Requirements
 You can download this repository as a zip file, or clone or pull it by using the command (from the command-line):
