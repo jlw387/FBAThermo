@@ -15,17 +15,17 @@ function TXTLDictionary(time_start,time_stop,time_step)
   # Setup the mRNA elongation rate, and global translation
   RNAP_concentration_nM = 75;                          # 60-75nM (ACS SynBio Garamella 2016)
   RNAP_elongation_rate = 25;                          # >5 NT/s (ACS SynBio Garamella 2016)
-  RIBOSOME_concentration = 0.0016;                      # 0.0016mM (Underwood, Swartz, Puglisi 2005 Biotech Bioeng) & <0.0023mM (ACS SynBio Garamella 2016)
+  RIBOSOME_concentration = 0.0016;                      # 0.0016mM with 72% MaxActive (Underwood, Swartz, Puglisi 2005 Biotech Bioeng) & <0.0023mM (ACS SynBio Garamella 2016)
   RIBOSOME_elongation_rate = 2;                      # >1 (ACS SynBio Garamella 2016) & 1.5 AA/sec (Underwood, Swartz, Puglisi 2005 Biotech Bioeng)
   #number_of_cells = 2e8;                                # 1e9 cells/ml
 
   # Protein of Interest Sequences
-  mRNA_length = 660;
-  protein_length = 219;
+  mRNA_length = 683;
+  protein_length = 229;
   gene_copies = 3.125e10;
   mRNA_degradation_rate = 5.2;
   polysome_gain = 10;
-  volume = 15e-6
+  volume = 10e-6
   inducer = 35;
   plasmid_saturation_coefficient = 3.5;
   mRNA_saturation_coefficient = 0.045;

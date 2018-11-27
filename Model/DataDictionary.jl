@@ -25,22 +25,22 @@
 # ----------------------------------------------------------------------------------- #
 # Function: DataDictionary
 # Description: Holds simulation and model parameters as key => value pairs in a Julia Dict()
-# Generated on: 2017-05-02T17:01:59.712
+# Generated on: 2017-05-02T17:02:18.094
 #
 # Input arguments:
-# time_start::Float64 => Simulation start time value (scalar)
-# time_stop::Float64 => Simulation stop time value (scalar)
-# time_step::Float64 => Simulation time step (scalar)
+# time_start::Float64 => Simulation start time value (scalar) 
+# time_stop::Float64 => Simulation stop time value (scalar) 
+# time_step::Float64 => Simulation time step (scalar) 
 #
 # Output arguments:
-# data_dictionary::Dict{AbstractString,Any} => Dictionary holding model and simulation parameters as key => value pairs
+# data_dictionary::Dict{AbstractString,Any} => Dictionary holding model and simulation parameters as key => value pairs 
 # ----------------------------------------------------------------------------------- #
-function DataDictionary(time_start,time_stop,time_step;)
+function DataDictionary(time_start,time_stop,time_step)
 
-	# Load the stoichiometric network from disk -
+	# Load the stoichiometric network from disk - 
 	stoichiometric_matrix = readdlm("Network.dat");
 
-	# Setup default flux bounds array -
+	# Setup default flux bounds array - 
 	default_bounds_array = [
 		0	100.0	;	# 1 M_atp_c+M_glc_D_c --> M_adp_c+M_g6p_c
 		0	100.0	;	# 2 M_g6p_c --> M_f6p_c
@@ -208,34 +208,34 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0	100.0	;	# 164 M_atp_c+M_cmp_c --> M_adp_c+M_cdp_c
 		0	100.0	;	# 165 M_atp_c+M_gmp_c --> M_adp_c+M_gdp_c
 		0	100.0	;	# 166 M_amp_c+M_atp_c --> 2.0*M_adp_c
-		0	100.0	;	# 167 GENE_CAT+RNAP --> OPEN_GENE_CAT
-		0	100.0	;	# 168 OPEN_GENE_CAT+151.0*M_gtp_c+144.0*M_ctp_c+189.0*M_utp_c+176.0*M_atp_c+660.0*M_h2o_c --> mRNA_CAT+GENE_CAT+RNAP+660.0*M_ppi_c
-		0	100.0	;	# 169 mRNA_CAT --> 151.0*M_gmp_c+144.0*M_cmp_c+189.0*M_ump_c+176.0*M_amp_c
-		0	100.0	;	# 170 mRNA_CAT+RIBOSOME --> RIBOSOME_START_CAT
-		0	100.0	;	# 171 RIBOSOME_START_CAT+438.0*M_gtp_c+438.0*M_h2o_c+15.0*M_ala_L_c_tRNA+5.0*M_arg_L_c_tRNA+10.0*M_asn_L_c_tRNA+12.0*M_asp_L_c_tRNA+5.0*M_cys_L_c_tRNA+12.0*M_glu_L_c_tRNA+13.0*M_gln_L_c_tRNA+10.0*M_gly_L_c_tRNA+12.0*M_his_L_c_tRNA+9.0*M_ile_L_c_tRNA+13.0*M_leu_L_c_tRNA+12.0*M_lys_L_c_tRNA+9.0*M_met_L_c_tRNA+20.0*M_phe_L_c_tRNA+7.0*M_pro_L_c_tRNA+10.0*M_ser_L_c_tRNA+13.0*M_thr_L_c_tRNA+5.0*M_trp_L_c_tRNA+11.0*M_tyr_L_c_tRNA+16.0*M_val_L_c_tRNA --> RIBOSOME+mRNA_CAT+PROTEIN_CAT+438.0*M_gdp_c+438.0*M_pi_c+219.0*tRNA
-		0	100.0	;	# 172 15.0*M_ala_L_c+15.0*M_atp_c+15.0*tRNA+15.0*M_h2o_c --> 15.0*M_ala_L_c_tRNA+15.0*M_amp_c+15.0*M_ppi_c
-		0	100.0	;	# 173 5.0*M_arg_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_arg_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c
-		0	100.0	;	# 174 10.0*M_asn_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_asn_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c
-		0	100.0	;	# 175 12.0*M_asp_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_asp_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0	100.0	;	# 176 5.0*M_cys_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_cys_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c
-		0	100.0	;	# 177 12.0*M_glu_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_glu_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0	100.0	;	# 178 13.0*M_gln_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_gln_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c
-		0	100.0	;	# 179 10.0*M_gly_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_gly_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c
-		0	100.0	;	# 180 12.0*M_his_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_his_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0	100.0	;	# 181 9.0*M_ile_L_c+9.0*M_atp_c+9.0*tRNA+9.0*M_h2o_c --> 9.0*M_ile_L_c_tRNA+9.0*M_amp_c+9.0*M_ppi_c
-		0	100.0	;	# 182 13.0*M_leu_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_leu_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c
-		0	100.0	;	# 183 12.0*M_lys_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_lys_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0	100.0	;	# 184 9.0*M_met_L_c+9.0*M_atp_c+9.0*tRNA+9.0*M_h2o_c --> 9.0*M_met_L_c_tRNA+9.0*M_amp_c+9.0*M_ppi_c
-		0	100.0	;	# 185 20.0*M_phe_L_c+20.0*M_atp_c+20.0*tRNA+20.0*M_h2o_c --> 20.0*M_phe_L_c_tRNA+20.0*M_amp_c+20.0*M_ppi_c
-		0	100.0	;	# 186 7.0*M_pro_L_c+7.0*M_atp_c+7.0*tRNA+7.0*M_h2o_c --> 7.0*M_pro_L_c_tRNA+7.0*M_amp_c+7.0*M_ppi_c
-		0	100.0	;	# 187 10.0*M_ser_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_ser_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c
-		0	100.0	;	# 188 13.0*M_thr_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_thr_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c
-		0	100.0	;	# 189 5.0*M_trp_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_trp_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c
-		0	100.0	;	# 190 11.0*M_tyr_L_c+11.0*M_atp_c+11.0*tRNA+11.0*M_h2o_c --> 11.0*M_tyr_L_c_tRNA+11.0*M_amp_c+11.0*M_ppi_c
-		0	100.0	;	# 191 16.0*M_val_L_c+16.0*M_atp_c+16.0*tRNA+16.0*M_h2o_c --> 16.0*M_val_L_c_tRNA+16.0*M_amp_c+16.0*M_ppi_c
-		0	100.0	;	# 192 tRNA --> []
-		0	100.0	;	# 193 [] --> tRNA
-		0	100.0	;	# 194 PROTEIN_CAT --> []
+		0	100.0	;	# 167 GENE_deGFP+RNAP --> OPEN_GENE_deGFP
+		0	100.0	;	# 168 OPEN_GENE_deGFP+183.0*M_gtp_c+231.0*M_ctp_c+101.0*M_utp_c+163.0*M_atp_c+678.0*M_h2o_c --> mRNA_deGFP+GENE_deGFP+RNAP+678.0*M_ppi_c
+		0	100.0	;	# 169 mRNA_deGFP --> 183.0*M_gmp_c+231.0*M_cmp_c+101.0*M_ump_c+163.0*M_amp_c
+		0	100.0	;	# 170 mRNA_deGFP+RIBOSOME --> RIBOSOME_START_deGFP
+		0	100.0	;	# 171 RIBOSOME_START_deGFP+450.0*M_gtp_c+450.0*M_h2o_c+8.0*M_ala_L_c_tRNA_c+6.0*M_arg_L_c_tRNA_c+13.0*M_asn_L_c_tRNA_c+17.0*M_asp_L_c_tRNA_c+2.0*M_cys_L_c_tRNA_c+14.0*M_glu_L_c_tRNA_c+8.0*M_gln_L_c_tRNA_c+20.0*M_gly_L_c_tRNA_c+9.0*M_his_L_c_tRNA_c+12.0*M_ile_L_c_tRNA_c+19.0*M_leu_L_c_tRNA_c+18.0*M_lys_L_c_tRNA_c+5.0*M_met_L_c_tRNA_c+12.0*M_phe_L_c_tRNA_c+10.0*M_pro_L_c_tRNA_c+9.0*M_ser_L_c_tRNA_c+15.0*M_thr_L_c_tRNA_c+M_trp_L_c_tRNA_c+10.0*M_tyr_L_c_tRNA_c+17.0*M_val_L_c_tRNA_c --> RIBOSOME+mRNA_deGFP+PROTEIN_deGFP+450.0*M_gdp_c+450.0*M_pi_c+225.0*tRNA_c
+		0	100.0	;	# 172 8.0*M_ala_L_c+8.0*M_atp_c+8.0*tRNA_c+8.0*M_h2o_c --> 8.0*M_ala_L_c_tRNA_c+8.0*M_amp_c+8.0*M_ppi_c
+		0	100.0	;	# 173 6.0*M_arg_L_c+6.0*M_atp_c+6.0*tRNA_c+6.0*M_h2o_c --> 6.0*M_arg_L_c_tRNA_c+6.0*M_amp_c+6.0*M_ppi_c
+		0	100.0	;	# 174 13.0*M_asn_L_c+13.0*M_atp_c+13.0*tRNA_c+13.0*M_h2o_c --> 13.0*M_asn_L_c_tRNA_c+13.0*M_amp_c+13.0*M_ppi_c
+		0	100.0	;	# 175 17.0*M_asp_L_c+17.0*M_atp_c+17.0*tRNA_c+17.0*M_h2o_c --> 17.0*M_asp_L_c_tRNA_c+17.0*M_amp_c+17.0*M_ppi_c
+		0	100.0	;	# 176 2.0*M_cys_L_c+2.0*M_atp_c+2.0*tRNA_c+2.0*M_h2o_c --> 2.0*M_cys_L_c_tRNA_c+2.0*M_amp_c+2.0*M_ppi_c
+		0	100.0	;	# 177 14.0*M_glu_L_c+14.0*M_atp_c+14.0*tRNA_c+14.0*M_h2o_c --> 14.0*M_glu_L_c_tRNA_c+14.0*M_amp_c+14.0*M_ppi_c
+		0	100.0	;	# 178 8.0*M_gln_L_c+8.0*M_atp_c+8.0*tRNA_c+8.0*M_h2o_c --> 8.0*M_gln_L_c_tRNA_c+8.0*M_amp_c+8.0*M_ppi_c
+		0	100.0	;	# 179 20.0*M_gly_L_c+20.0*M_atp_c+20.0*tRNA_c+20.0*M_h2o_c --> 20.0*M_gly_L_c_tRNA_c+20.0*M_amp_c+20.0*M_ppi_c
+		0	100.0	;	# 180 9.0*M_his_L_c+9.0*M_atp_c+9.0*tRNA_c+9.0*M_h2o_c --> 9.0*M_his_L_c_tRNA_c+9.0*M_amp_c+9.0*M_ppi_c
+		0	100.0	;	# 181 12.0*M_ile_L_c+12.0*M_atp_c+12.0*tRNA_c+12.0*M_h2o_c --> 12.0*M_ile_L_c_tRNA_c+12.0*M_amp_c+12.0*M_ppi_c
+		0	100.0	;	# 182 19.0*M_leu_L_c+19.0*M_atp_c+19.0*tRNA_c+19.0*M_h2o_c --> 19.0*M_leu_L_c_tRNA_c+19.0*M_amp_c+19.0*M_ppi_c
+		0	100.0	;	# 183 18.0*M_lys_L_c+18.0*M_atp_c+18.0*tRNA_c+18.0*M_h2o_c --> 18.0*M_lys_L_c_tRNA_c+18.0*M_amp_c+18.0*M_ppi_c
+		0	100.0	;	# 184 5.0*M_met_L_c+5.0*M_atp_c+5.0*tRNA_c+5.0*M_h2o_c --> 5.0*M_met_L_c_tRNA_c+5.0*M_amp_c+5.0*M_ppi_c
+		0	100.0	;	# 185 12.0*M_phe_L_c+12.0*M_atp_c+12.0*tRNA_c+12.0*M_h2o_c --> 12.0*M_phe_L_c_tRNA_c+12.0*M_amp_c+12.0*M_ppi_c
+		0	100.0	;	# 186 10.0*M_pro_L_c+10.0*M_atp_c+10.0*tRNA_c+10.0*M_h2o_c --> 10.0*M_pro_L_c_tRNA_c+10.0*M_amp_c+10.0*M_ppi_c
+		0	100.0	;	# 187 9.0*M_ser_L_c+9.0*M_atp_c+9.0*tRNA_c+9.0*M_h2o_c --> 9.0*M_ser_L_c_tRNA_c+9.0*M_amp_c+9.0*M_ppi_c
+		0	100.0	;	# 188 15.0*M_thr_L_c+15.0*M_atp_c+15.0*tRNA_c+15.0*M_h2o_c --> 15.0*M_thr_L_c_tRNA_c+15.0*M_amp_c+15.0*M_ppi_c
+		0	100.0	;	# 189 M_trp_L_c+M_atp_c+tRNA_c+M_h2o_c --> M_trp_L_c_tRNA_c+M_amp_c+M_ppi_c
+		0	100.0	;	# 190 10.0*M_tyr_L_c+10.0*M_atp_c+10.0*tRNA_c+10.0*M_h2o_c --> 10.0*M_tyr_L_c_tRNA_c+10.0*M_amp_c+10.0*M_ppi_c
+		0	100.0	;	# 191 17.0*M_val_L_c+17.0*M_atp_c+17.0*tRNA_c+17.0*M_h2o_c --> 17.0*M_val_L_c_tRNA_c+17.0*M_amp_c+17.0*M_ppi_c
+		0	100.0	;	# 192 [] --> tRNA_c
+		0	100.0	;	# 193 tRNA_c --> []
+		0	100.0	;	# 194 PROTEIN_deGFP --> []
 		0	100.0	;	# 195 [] --> M_o2_c
 		0	100.0	;	# 196 M_co2_c --> []
 		0	100.0	;	# 197 M_h_c --> []
@@ -309,9 +309,9 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0	100.0	;	# 265 [] --> M_adp_c
 	];
 
-	# Setup default species bounds array -
+	# Setup default species bounds array - 
 	species_bounds_array = [
-		0.0	0.0	;	# 1 GENE_CAT
+		0.0	0.0	;	# 1 GENE_deGFP
 		0.0	0.0	;	# 2 M_10fthf_c
 		0.0	0.0	;	# 3 M_13dpg_c
 		0.0	0.0	;	# 4 M_2ddg6p_c
@@ -333,14 +333,14 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	0.0	;	# 20 M_air_c
 		0.0	0.0	;	# 21 M_akg_c
 		0.0	0.0	;	# 22 M_ala_L_c
-		0.0	0.0	;	# 23 M_ala_L_c_tRNA
+		0.0	0.0	;	# 23 M_ala_L_c_tRNA_c
 		0.0	0.0	;	# 24 M_amp_c
 		0.0	0.0	;	# 25 M_arg_L_c
-		0.0	0.0	;	# 26 M_arg_L_c_tRNA
+		0.0	0.0	;	# 26 M_arg_L_c_tRNA_c
 		0.0	0.0	;	# 27 M_asn_L_c
-		0.0	0.0	;	# 28 M_asn_L_c_tRNA
+		0.0	0.0	;	# 28 M_asn_L_c_tRNA_c
 		0.0	0.0	;	# 29 M_asp_L_c
-		0.0	0.0	;	# 30 M_asp_L_c_tRNA
+		0.0	0.0	;	# 30 M_asp_L_c_tRNA_c
 		0.0	0.0	;	# 31 M_atp_c
 		0.0	0.0	;	# 32 M_cadav_c
 		0.0	0.0	;	# 33 M_cair_c
@@ -353,7 +353,7 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	0.0	;	# 40 M_coa_c
 		0.0	0.0	;	# 41 M_ctp_c
 		0.0	0.0	;	# 42 M_cys_L_c
-		0.0	0.0	;	# 43 M_cys_L_c_tRNA
+		0.0	0.0	;	# 43 M_cys_L_c_tRNA_c
 		0.0	0.0	;	# 44 M_dhap_c
 		0.0	0.0	;	# 45 M_dhf_c
 		0.0	0.0	;	# 46 M_e4p_c
@@ -372,12 +372,12 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	0.0	;	# 59 M_gdp_c
 		0.0	0.0	;	# 60 M_glc_D_c
 		0.0	0.0	;	# 61 M_gln_L_c
-		0.0	0.0	;	# 62 M_gln_L_c_tRNA
+		0.0	0.0	;	# 62 M_gln_L_c_tRNA_c
 		0.0	0.0	;	# 63 M_glu_L_c
-		0.0	0.0	;	# 64 M_glu_L_c_tRNA
+		0.0	0.0	;	# 64 M_glu_L_c_tRNA_c
 		0.0	0.0	;	# 65 M_glx_c
 		0.0	0.0	;	# 66 M_gly_L_c
-		0.0	0.0	;	# 67 M_gly_L_c_tRNA
+		0.0	0.0	;	# 67 M_gly_L_c_tRNA_c
 		0.0	0.0	;	# 68 M_glycoA_c
 		0.0	0.0	;	# 69 M_gmp_c
 		0.0	0.0	;	# 70 M_gtp_c
@@ -388,20 +388,20 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	0.0	;	# 75 M_hco3_c
 		0.0	0.0	;	# 76 M_he_c
 		0.0	0.0	;	# 77 M_his_L_c
-		0.0	0.0	;	# 78 M_his_L_c_tRNA
+		0.0	0.0	;	# 78 M_his_L_c_tRNA_c
 		0.0	0.0	;	# 79 M_icit_c
 		0.0	0.0	;	# 80 M_ile_L_c
-		0.0	0.0	;	# 81 M_ile_L_c_tRNA
+		0.0	0.0	;	# 81 M_ile_L_c_tRNA_c
 		0.0	0.0	;	# 82 M_imp_c
 		0.0	0.0	;	# 83 M_indole_c
 		0.0	0.0	;	# 84 M_lac_D_c
 		0.0	0.0	;	# 85 M_leu_L_c
-		0.0	0.0	;	# 86 M_leu_L_c_tRNA
+		0.0	0.0	;	# 86 M_leu_L_c_tRNA_c
 		0.0	0.0	;	# 87 M_lys_L_c
-		0.0	0.0	;	# 88 M_lys_L_c_tRNA
+		0.0	0.0	;	# 88 M_lys_L_c_tRNA_c
 		0.0	0.0	;	# 89 M_mal_L_c
 		0.0	0.0	;	# 90 M_met_L_c
-		0.0	0.0	;	# 91 M_met_L_c_tRNA
+		0.0	0.0	;	# 91 M_met_L_c_tRNA_c
 		0.0	0.0	;	# 92 M_methf_c
 		0.0	0.0	;	# 93 M_mglx_c
 		0.0	0.0	;	# 94 M_mlthf_c
@@ -418,11 +418,11 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	0.0	;	# 105 M_or_c
 		0.0	0.0	;	# 106 M_pep_c
 		0.0	0.0	;	# 107 M_phe_L_c
-		0.0	0.0	;	# 108 M_phe_L_c_tRNA
+		0.0	0.0	;	# 108 M_phe_L_c_tRNA_c
 		0.0	0.0	;	# 109 M_pi_c
 		0.0	0.0	;	# 110 M_ppi_c
 		0.0	0.0	;	# 111 M_pro_L_c
-		0.0	0.0	;	# 112 M_pro_L_c_tRNA
+		0.0	0.0	;	# 112 M_pro_L_c_tRNA_c
 		0.0	0.0	;	# 113 M_prop_c
 		0.0	0.0	;	# 114 M_prpp_c
 		0.0	0.0	;	# 115 M_pyr_c
@@ -433,33 +433,33 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	0.0	;	# 120 M_s7p_c
 		0.0	0.0	;	# 121 M_saicar_c
 		0.0	0.0	;	# 122 M_ser_L_c
-		0.0	0.0	;	# 123 M_ser_L_c_tRNA
+		0.0	0.0	;	# 123 M_ser_L_c_tRNA_c
 		0.0	0.0	;	# 124 M_succ_c
 		0.0	0.0	;	# 125 M_succoa_c
 		0.0	0.0	;	# 126 M_thf_c
 		0.0	0.0	;	# 127 M_thr_L_c
-		0.0	0.0	;	# 128 M_thr_L_c_tRNA
+		0.0	0.0	;	# 128 M_thr_L_c_tRNA_c
 		0.0	0.0	;	# 129 M_trp_L_c
-		0.0	0.0	;	# 130 M_trp_L_c_tRNA
+		0.0	0.0	;	# 130 M_trp_L_c_tRNA_c
 		0.0	0.0	;	# 131 M_tyr_L_c
-		0.0	0.0	;	# 132 M_tyr_L_c_tRNA
+		0.0	0.0	;	# 132 M_tyr_L_c_tRNA_c
 		0.0	0.0	;	# 133 M_udp_c
 		0.0	0.0	;	# 134 M_ump_c
 		0.0	0.0	;	# 135 M_utp_c
 		0.0	0.0	;	# 136 M_val_L_c
-		0.0	0.0	;	# 137 M_val_L_c_tRNA
+		0.0	0.0	;	# 137 M_val_L_c_tRNA_c
 		0.0	0.0	;	# 138 M_xmp_c
 		0.0	0.0	;	# 139 M_xu5p_D_c
-		0.0	0.0	;	# 140 OPEN_GENE_CAT
-		0.0	0.0	;	# 141 PROTEIN_CAT
+		0.0	0.0	;	# 140 OPEN_GENE_deGFP
+		0.0	0.0	;	# 141 PROTEIN_deGFP
 		0.0	0.0	;	# 142 RIBOSOME
-		0.0	0.0	;	# 143 RIBOSOME_START_CAT
+		0.0	0.0	;	# 143 RIBOSOME_START_deGFP
 		0.0	0.0	;	# 144 RNAP
-		0.0	0.0	;	# 145 mRNA_CAT
-		0.0	0.0	;	# 146 tRNA
+		0.0	0.0	;	# 145 mRNA_deGFP
+		0.0	0.0	;	# 146 tRNA_c
 	];
 
-	# Setup the objective coefficient array -
+	# Setup the objective coefficient array - 
 	objective_coefficient_array = [
 		0.0	;	# 1 R_glk_atp::M_atp_c+M_glc_D_c --> M_adp_c+M_g6p_c
 		0.0	;	# 2 R_pgi::M_g6p_c --> M_f6p_c
@@ -627,34 +627,34 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	;	# 164 R_atp_cmp::M_atp_c+M_cmp_c --> M_adp_c+M_cdp_c
 		0.0	;	# 165 R_atp_gmp::M_atp_c+M_gmp_c --> M_adp_c+M_gdp_c
 		0.0	;	# 166 R_adk_atp::M_amp_c+M_atp_c --> 2.0*M_adp_c
-		0.0	;	# 167 transcriptional_initiation_CAT::GENE_CAT+RNAP --> OPEN_GENE_CAT
-		0.0	;	# 168 transcription_CAT::OPEN_GENE_CAT+151.0*M_gtp_c+144.0*M_ctp_c+189.0*M_utp_c+176.0*M_atp_c+660.0*M_h2o_c --> mRNA_CAT+GENE_CAT+RNAP+660.0*M_ppi_c
-		0.0	;	# 169 mRNA_degradation_CAT::mRNA_CAT --> 151.0*M_gmp_c+144.0*M_cmp_c+189.0*M_ump_c+176.0*M_amp_c
-		0.0	;	# 170 translation_initiation_CAT::mRNA_CAT+RIBOSOME --> RIBOSOME_START_CAT
-		0.0	;	# 171 translation_CAT::RIBOSOME_START_CAT+438.0*M_gtp_c+438.0*M_h2o_c+15.0*M_ala_L_c_tRNA+5.0*M_arg_L_c_tRNA+10.0*M_asn_L_c_tRNA+12.0*M_asp_L_c_tRNA+5.0*M_cys_L_c_tRNA+12.0*M_glu_L_c_tRNA+13.0*M_gln_L_c_tRNA+10.0*M_gly_L_c_tRNA+12.0*M_his_L_c_tRNA+9.0*M_ile_L_c_tRNA+13.0*M_leu_L_c_tRNA+12.0*M_lys_L_c_tRNA+9.0*M_met_L_c_tRNA+20.0*M_phe_L_c_tRNA+7.0*M_pro_L_c_tRNA+10.0*M_ser_L_c_tRNA+13.0*M_thr_L_c_tRNA+5.0*M_trp_L_c_tRNA+11.0*M_tyr_L_c_tRNA+16.0*M_val_L_c_tRNA --> RIBOSOME+mRNA_CAT+PROTEIN_CAT+438.0*M_gdp_c+438.0*M_pi_c+219.0*tRNA
-		0.0	;	# 172 tRNA_charging_M_ala_L_c_CAT::15.0*M_ala_L_c+15.0*M_atp_c+15.0*tRNA+15.0*M_h2o_c --> 15.0*M_ala_L_c_tRNA+15.0*M_amp_c+15.0*M_ppi_c
-		0.0	;	# 173 tRNA_charging_M_arg_L_c_CAT::5.0*M_arg_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_arg_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c
-		0.0	;	# 174 tRNA_charging_M_asn_L_c_CAT::10.0*M_asn_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_asn_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c
-		0.0	;	# 175 tRNA_charging_M_asp_L_c_CAT::12.0*M_asp_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_asp_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0.0	;	# 176 tRNA_charging_M_cys_L_c_CAT::5.0*M_cys_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_cys_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c
-		0.0	;	# 177 tRNA_charging_M_glu_L_c_CAT::12.0*M_glu_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_glu_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0.0	;	# 178 tRNA_charging_M_gln_L_c_CAT::13.0*M_gln_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_gln_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c
-		0.0	;	# 179 tRNA_charging_M_gly_L_c_CAT::10.0*M_gly_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_gly_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c
-		0.0	;	# 180 tRNA_charging_M_his_L_c_CAT::12.0*M_his_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_his_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0.0	;	# 181 tRNA_charging_M_ile_L_c_CAT::9.0*M_ile_L_c+9.0*M_atp_c+9.0*tRNA+9.0*M_h2o_c --> 9.0*M_ile_L_c_tRNA+9.0*M_amp_c+9.0*M_ppi_c
-		0.0	;	# 182 tRNA_charging_M_leu_L_c_CAT::13.0*M_leu_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_leu_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c
-		0.0	;	# 183 tRNA_charging_M_lys_L_c_CAT::12.0*M_lys_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_lys_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c
-		0.0	;	# 184 tRNA_charging_M_met_L_c_CAT::9.0*M_met_L_c+9.0*M_atp_c+9.0*tRNA+9.0*M_h2o_c --> 9.0*M_met_L_c_tRNA+9.0*M_amp_c+9.0*M_ppi_c
-		0.0	;	# 185 tRNA_charging_M_phe_L_c_CAT::20.0*M_phe_L_c+20.0*M_atp_c+20.0*tRNA+20.0*M_h2o_c --> 20.0*M_phe_L_c_tRNA+20.0*M_amp_c+20.0*M_ppi_c
-		0.0	;	# 186 tRNA_charging_M_pro_L_c_CAT::7.0*M_pro_L_c+7.0*M_atp_c+7.0*tRNA+7.0*M_h2o_c --> 7.0*M_pro_L_c_tRNA+7.0*M_amp_c+7.0*M_ppi_c
-		0.0	;	# 187 tRNA_charging_M_ser_L_c_CAT::10.0*M_ser_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_ser_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c
-		0.0	;	# 188 tRNA_charging_M_thr_L_c_CAT::13.0*M_thr_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_thr_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c
-		0.0	;	# 189 tRNA_charging_M_trp_L_c_CAT::5.0*M_trp_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_trp_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c
-		0.0	;	# 190 tRNA_charging_M_tyr_L_c_CAT::11.0*M_tyr_L_c+11.0*M_atp_c+11.0*tRNA+11.0*M_h2o_c --> 11.0*M_tyr_L_c_tRNA+11.0*M_amp_c+11.0*M_ppi_c
-		0.0	;	# 191 tRNA_charging_M_val_L_c_CAT::16.0*M_val_L_c+16.0*M_atp_c+16.0*tRNA+16.0*M_h2o_c --> 16.0*M_val_L_c_tRNA+16.0*M_amp_c+16.0*M_ppi_c
-		0.0	;	# 192 tRNA_exchange::tRNA --> []
-		0.0	;	# 193 tRNA_exchange_reverse::[] --> tRNA
-		0.0	;	# 194 PROTEIN_export_CAT::PROTEIN_CAT --> []
+		0.0	;	# 167 transcriptional_initiation_deGFP::GENE_deGFP+RNAP --> OPEN_GENE_deGFP
+		0.0	;	# 168 transcription_deGFP::OPEN_GENE_deGFP+183.0*M_gtp_c+231.0*M_ctp_c+101.0*M_utp_c+163.0*M_atp_c+678.0*M_h2o_c --> mRNA_deGFP+GENE_deGFP+RNAP+678.0*M_ppi_c
+		0.0	;	# 169 mRNA_degradation_deGFP::mRNA_deGFP --> 183.0*M_gmp_c+231.0*M_cmp_c+101.0*M_ump_c+163.0*M_amp_c
+		0.0	;	# 170 translation_initiation_deGFP::mRNA_deGFP+RIBOSOME --> RIBOSOME_START_deGFP
+		0.0	;	# 171 translation_deGFP::RIBOSOME_START_deGFP+450.0*M_gtp_c+450.0*M_h2o_c+8.0*M_ala_L_c_tRNA_c+6.0*M_arg_L_c_tRNA_c+13.0*M_asn_L_c_tRNA_c+17.0*M_asp_L_c_tRNA_c+2.0*M_cys_L_c_tRNA_c+14.0*M_glu_L_c_tRNA_c+8.0*M_gln_L_c_tRNA_c+20.0*M_gly_L_c_tRNA_c+9.0*M_his_L_c_tRNA_c+12.0*M_ile_L_c_tRNA_c+19.0*M_leu_L_c_tRNA_c+18.0*M_lys_L_c_tRNA_c+5.0*M_met_L_c_tRNA_c+12.0*M_phe_L_c_tRNA_c+10.0*M_pro_L_c_tRNA_c+9.0*M_ser_L_c_tRNA_c+15.0*M_thr_L_c_tRNA_c+M_trp_L_c_tRNA_c+10.0*M_tyr_L_c_tRNA_c+17.0*M_val_L_c_tRNA_c --> RIBOSOME+mRNA_deGFP+PROTEIN_deGFP+450.0*M_gdp_c+450.0*M_pi_c+225.0*tRNA_c
+		0.0	;	# 172 tRNA_c_charging_M_ala_L_c_deGFP::8.0*M_ala_L_c+8.0*M_atp_c+8.0*tRNA_c+8.0*M_h2o_c --> 8.0*M_ala_L_c_tRNA_c+8.0*M_amp_c+8.0*M_ppi_c
+		0.0	;	# 173 tRNA_c_charging_M_arg_L_c_deGFP::6.0*M_arg_L_c+6.0*M_atp_c+6.0*tRNA_c+6.0*M_h2o_c --> 6.0*M_arg_L_c_tRNA_c+6.0*M_amp_c+6.0*M_ppi_c
+		0.0	;	# 174 tRNA_c_charging_M_asn_L_c_deGFP::13.0*M_asn_L_c+13.0*M_atp_c+13.0*tRNA_c+13.0*M_h2o_c --> 13.0*M_asn_L_c_tRNA_c+13.0*M_amp_c+13.0*M_ppi_c
+		0.0	;	# 175 tRNA_c_charging_M_asp_L_c_deGFP::17.0*M_asp_L_c+17.0*M_atp_c+17.0*tRNA_c+17.0*M_h2o_c --> 17.0*M_asp_L_c_tRNA_c+17.0*M_amp_c+17.0*M_ppi_c
+		0.0	;	# 176 tRNA_c_charging_M_cys_L_c_deGFP::2.0*M_cys_L_c+2.0*M_atp_c+2.0*tRNA_c+2.0*M_h2o_c --> 2.0*M_cys_L_c_tRNA_c+2.0*M_amp_c+2.0*M_ppi_c
+		0.0	;	# 177 tRNA_c_charging_M_glu_L_c_deGFP::14.0*M_glu_L_c+14.0*M_atp_c+14.0*tRNA_c+14.0*M_h2o_c --> 14.0*M_glu_L_c_tRNA_c+14.0*M_amp_c+14.0*M_ppi_c
+		0.0	;	# 178 tRNA_c_charging_M_gln_L_c_deGFP::8.0*M_gln_L_c+8.0*M_atp_c+8.0*tRNA_c+8.0*M_h2o_c --> 8.0*M_gln_L_c_tRNA_c+8.0*M_amp_c+8.0*M_ppi_c
+		0.0	;	# 179 tRNA_c_charging_M_gly_L_c_deGFP::20.0*M_gly_L_c+20.0*M_atp_c+20.0*tRNA_c+20.0*M_h2o_c --> 20.0*M_gly_L_c_tRNA_c+20.0*M_amp_c+20.0*M_ppi_c
+		0.0	;	# 180 tRNA_c_charging_M_his_L_c_deGFP::9.0*M_his_L_c+9.0*M_atp_c+9.0*tRNA_c+9.0*M_h2o_c --> 9.0*M_his_L_c_tRNA_c+9.0*M_amp_c+9.0*M_ppi_c
+		0.0	;	# 181 tRNA_c_charging_M_ile_L_c_deGFP::12.0*M_ile_L_c+12.0*M_atp_c+12.0*tRNA_c+12.0*M_h2o_c --> 12.0*M_ile_L_c_tRNA_c+12.0*M_amp_c+12.0*M_ppi_c
+		0.0	;	# 182 tRNA_c_charging_M_leu_L_c_deGFP::19.0*M_leu_L_c+19.0*M_atp_c+19.0*tRNA_c+19.0*M_h2o_c --> 19.0*M_leu_L_c_tRNA_c+19.0*M_amp_c+19.0*M_ppi_c
+		0.0	;	# 183 tRNA_c_charging_M_lys_L_c_deGFP::18.0*M_lys_L_c+18.0*M_atp_c+18.0*tRNA_c+18.0*M_h2o_c --> 18.0*M_lys_L_c_tRNA_c+18.0*M_amp_c+18.0*M_ppi_c
+		0.0	;	# 184 tRNA_c_charging_M_met_L_c_deGFP::5.0*M_met_L_c+5.0*M_atp_c+5.0*tRNA_c+5.0*M_h2o_c --> 5.0*M_met_L_c_tRNA_c+5.0*M_amp_c+5.0*M_ppi_c
+		0.0	;	# 185 tRNA_c_charging_M_phe_L_c_deGFP::12.0*M_phe_L_c+12.0*M_atp_c+12.0*tRNA_c+12.0*M_h2o_c --> 12.0*M_phe_L_c_tRNA_c+12.0*M_amp_c+12.0*M_ppi_c
+		0.0	;	# 186 tRNA_c_charging_M_pro_L_c_deGFP::10.0*M_pro_L_c+10.0*M_atp_c+10.0*tRNA_c+10.0*M_h2o_c --> 10.0*M_pro_L_c_tRNA_c+10.0*M_amp_c+10.0*M_ppi_c
+		0.0	;	# 187 tRNA_c_charging_M_ser_L_c_deGFP::9.0*M_ser_L_c+9.0*M_atp_c+9.0*tRNA_c+9.0*M_h2o_c --> 9.0*M_ser_L_c_tRNA_c+9.0*M_amp_c+9.0*M_ppi_c
+		0.0	;	# 188 tRNA_c_charging_M_thr_L_c_deGFP::15.0*M_thr_L_c+15.0*M_atp_c+15.0*tRNA_c+15.0*M_h2o_c --> 15.0*M_thr_L_c_tRNA_c+15.0*M_amp_c+15.0*M_ppi_c
+		0.0	;	# 189 tRNA_c_charging_M_trp_L_c_deGFP::M_trp_L_c+M_atp_c+tRNA_c+M_h2o_c --> M_trp_L_c_tRNA_c+M_amp_c+M_ppi_c
+		0.0	;	# 190 tRNA_c_charging_M_tyr_L_c_deGFP::10.0*M_tyr_L_c+10.0*M_atp_c+10.0*tRNA_c+10.0*M_h2o_c --> 10.0*M_tyr_L_c_tRNA_c+10.0*M_amp_c+10.0*M_ppi_c
+		0.0	;	# 191 tRNA_c_charging_M_val_L_c_deGFP::17.0*M_val_L_c+17.0*M_atp_c+17.0*tRNA_c+17.0*M_h2o_c --> 17.0*M_val_L_c_tRNA_c+17.0*M_amp_c+17.0*M_ppi_c
+		0.0	;	# 192 tRNA_c_exchange::[] --> tRNA_c
+		0.0	;	# 193 tRNA_c_exchange_reverse::tRNA_c --> []
+		0.0	;	# 194 PROTEIN_export_deGFP::PROTEIN_deGFP --> []
 		0.0	;	# 195 M_o2_c_exchange::[] --> M_o2_c
 		0.0	;	# 196 M_co2_c_exchange::M_co2_c --> []
 		0.0	;	# 197 M_h_c_exchange::M_h_c --> []
@@ -728,10 +728,10 @@ function DataDictionary(time_start,time_stop,time_step;)
 		0.0	;	# 265 M_adp_exchange::[] --> M_adp_c
 	];
 
-	# Min/Max flag - default is minimum -
+	# Min/Max flag - default is minimum - 
 	is_minimum_flag = true
 
-	# List of reation strings - used to write flux report
+	# List of reation strings - used to write flux report 
 	list_of_reaction_strings = [
 		"R_glk_atp::M_atp_c+M_glc_D_c --> M_adp_c+M_g6p_c"
 		"R_pgi::M_g6p_c --> M_f6p_c"
@@ -899,34 +899,34 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"R_atp_cmp::M_atp_c+M_cmp_c --> M_adp_c+M_cdp_c"
 		"R_atp_gmp::M_atp_c+M_gmp_c --> M_adp_c+M_gdp_c"
 		"R_adk_atp::M_amp_c+M_atp_c --> 2.0*M_adp_c"
-		"transcriptional_initiation_CAT::GENE_CAT+RNAP --> OPEN_GENE_CAT"
-		"transcription_CAT::OPEN_GENE_CAT+151.0*M_gtp_c+144.0*M_ctp_c+189.0*M_utp_c+176.0*M_atp_c+660.0*M_h2o_c --> mRNA_CAT+GENE_CAT+RNAP+660.0*M_ppi_c"
-		"mRNA_degradation_CAT::mRNA_CAT --> 151.0*M_gmp_c+144.0*M_cmp_c+189.0*M_ump_c+176.0*M_amp_c"
-		"translation_initiation_CAT::mRNA_CAT+RIBOSOME --> RIBOSOME_START_CAT"
-		"translation_CAT::RIBOSOME_START_CAT+438.0*M_gtp_c+438.0*M_h2o_c+15.0*M_ala_L_c_tRNA+5.0*M_arg_L_c_tRNA+10.0*M_asn_L_c_tRNA+12.0*M_asp_L_c_tRNA+5.0*M_cys_L_c_tRNA+12.0*M_glu_L_c_tRNA+13.0*M_gln_L_c_tRNA+10.0*M_gly_L_c_tRNA+12.0*M_his_L_c_tRNA+9.0*M_ile_L_c_tRNA+13.0*M_leu_L_c_tRNA+12.0*M_lys_L_c_tRNA+9.0*M_met_L_c_tRNA+20.0*M_phe_L_c_tRNA+7.0*M_pro_L_c_tRNA+10.0*M_ser_L_c_tRNA+13.0*M_thr_L_c_tRNA+5.0*M_trp_L_c_tRNA+11.0*M_tyr_L_c_tRNA+16.0*M_val_L_c_tRNA --> RIBOSOME+mRNA_CAT+PROTEIN_CAT+438.0*M_gdp_c+438.0*M_pi_c+219.0*tRNA"
-		"tRNA_charging_M_ala_L_c_CAT::15.0*M_ala_L_c+15.0*M_atp_c+15.0*tRNA+15.0*M_h2o_c --> 15.0*M_ala_L_c_tRNA+15.0*M_amp_c+15.0*M_ppi_c"
-		"tRNA_charging_M_arg_L_c_CAT::5.0*M_arg_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_arg_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c"
-		"tRNA_charging_M_asn_L_c_CAT::10.0*M_asn_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_asn_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c"
-		"tRNA_charging_M_asp_L_c_CAT::12.0*M_asp_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_asp_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c"
-		"tRNA_charging_M_cys_L_c_CAT::5.0*M_cys_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_cys_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c"
-		"tRNA_charging_M_glu_L_c_CAT::12.0*M_glu_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_glu_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c"
-		"tRNA_charging_M_gln_L_c_CAT::13.0*M_gln_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_gln_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c"
-		"tRNA_charging_M_gly_L_c_CAT::10.0*M_gly_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_gly_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c"
-		"tRNA_charging_M_his_L_c_CAT::12.0*M_his_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_his_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c"
-		"tRNA_charging_M_ile_L_c_CAT::9.0*M_ile_L_c+9.0*M_atp_c+9.0*tRNA+9.0*M_h2o_c --> 9.0*M_ile_L_c_tRNA+9.0*M_amp_c+9.0*M_ppi_c"
-		"tRNA_charging_M_leu_L_c_CAT::13.0*M_leu_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_leu_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c"
-		"tRNA_charging_M_lys_L_c_CAT::12.0*M_lys_L_c+12.0*M_atp_c+12.0*tRNA+12.0*M_h2o_c --> 12.0*M_lys_L_c_tRNA+12.0*M_amp_c+12.0*M_ppi_c"
-		"tRNA_charging_M_met_L_c_CAT::9.0*M_met_L_c+9.0*M_atp_c+9.0*tRNA+9.0*M_h2o_c --> 9.0*M_met_L_c_tRNA+9.0*M_amp_c+9.0*M_ppi_c"
-		"tRNA_charging_M_phe_L_c_CAT::20.0*M_phe_L_c+20.0*M_atp_c+20.0*tRNA+20.0*M_h2o_c --> 20.0*M_phe_L_c_tRNA+20.0*M_amp_c+20.0*M_ppi_c"
-		"tRNA_charging_M_pro_L_c_CAT::7.0*M_pro_L_c+7.0*M_atp_c+7.0*tRNA+7.0*M_h2o_c --> 7.0*M_pro_L_c_tRNA+7.0*M_amp_c+7.0*M_ppi_c"
-		"tRNA_charging_M_ser_L_c_CAT::10.0*M_ser_L_c+10.0*M_atp_c+10.0*tRNA+10.0*M_h2o_c --> 10.0*M_ser_L_c_tRNA+10.0*M_amp_c+10.0*M_ppi_c"
-		"tRNA_charging_M_thr_L_c_CAT::13.0*M_thr_L_c+13.0*M_atp_c+13.0*tRNA+13.0*M_h2o_c --> 13.0*M_thr_L_c_tRNA+13.0*M_amp_c+13.0*M_ppi_c"
-		"tRNA_charging_M_trp_L_c_CAT::5.0*M_trp_L_c+5.0*M_atp_c+5.0*tRNA+5.0*M_h2o_c --> 5.0*M_trp_L_c_tRNA+5.0*M_amp_c+5.0*M_ppi_c"
-		"tRNA_charging_M_tyr_L_c_CAT::11.0*M_tyr_L_c+11.0*M_atp_c+11.0*tRNA+11.0*M_h2o_c --> 11.0*M_tyr_L_c_tRNA+11.0*M_amp_c+11.0*M_ppi_c"
-		"tRNA_charging_M_val_L_c_CAT::16.0*M_val_L_c+16.0*M_atp_c+16.0*tRNA+16.0*M_h2o_c --> 16.0*M_val_L_c_tRNA+16.0*M_amp_c+16.0*M_ppi_c"
-		"tRNA_exchange::tRNA --> []"
-		"tRNA_exchange_reverse::[] --> tRNA"
-		"PROTEIN_export_CAT::PROTEIN_CAT --> []"
+		"transcriptional_initiation_deGFP::GENE_deGFP+RNAP --> OPEN_GENE_deGFP"
+		"transcription_deGFP::OPEN_GENE_deGFP+183.0*M_gtp_c+231.0*M_ctp_c+101.0*M_utp_c+163.0*M_atp_c+678.0*M_h2o_c --> mRNA_deGFP+GENE_deGFP+RNAP+678.0*M_ppi_c"
+		"mRNA_degradation_deGFP::mRNA_deGFP --> 183.0*M_gmp_c+231.0*M_cmp_c+101.0*M_ump_c+163.0*M_amp_c"
+		"translation_initiation_deGFP::mRNA_deGFP+RIBOSOME --> RIBOSOME_START_deGFP"
+		"translation_deGFP::RIBOSOME_START_deGFP+450.0*M_gtp_c+450.0*M_h2o_c+8.0*M_ala_L_c_tRNA_c+6.0*M_arg_L_c_tRNA_c+13.0*M_asn_L_c_tRNA_c+17.0*M_asp_L_c_tRNA_c+2.0*M_cys_L_c_tRNA_c+14.0*M_glu_L_c_tRNA_c+8.0*M_gln_L_c_tRNA_c+20.0*M_gly_L_c_tRNA_c+9.0*M_his_L_c_tRNA_c+12.0*M_ile_L_c_tRNA_c+19.0*M_leu_L_c_tRNA_c+18.0*M_lys_L_c_tRNA_c+5.0*M_met_L_c_tRNA_c+12.0*M_phe_L_c_tRNA_c+10.0*M_pro_L_c_tRNA_c+9.0*M_ser_L_c_tRNA_c+15.0*M_thr_L_c_tRNA_c+M_trp_L_c_tRNA_c+10.0*M_tyr_L_c_tRNA_c+17.0*M_val_L_c_tRNA_c --> RIBOSOME+mRNA_deGFP+PROTEIN_deGFP+450.0*M_gdp_c+450.0*M_pi_c+225.0*tRNA_c"
+		"tRNA_c_charging_M_ala_L_c_deGFP::8.0*M_ala_L_c+8.0*M_atp_c+8.0*tRNA_c+8.0*M_h2o_c --> 8.0*M_ala_L_c_tRNA_c+8.0*M_amp_c+8.0*M_ppi_c"
+		"tRNA_c_charging_M_arg_L_c_deGFP::6.0*M_arg_L_c+6.0*M_atp_c+6.0*tRNA_c+6.0*M_h2o_c --> 6.0*M_arg_L_c_tRNA_c+6.0*M_amp_c+6.0*M_ppi_c"
+		"tRNA_c_charging_M_asn_L_c_deGFP::13.0*M_asn_L_c+13.0*M_atp_c+13.0*tRNA_c+13.0*M_h2o_c --> 13.0*M_asn_L_c_tRNA_c+13.0*M_amp_c+13.0*M_ppi_c"
+		"tRNA_c_charging_M_asp_L_c_deGFP::17.0*M_asp_L_c+17.0*M_atp_c+17.0*tRNA_c+17.0*M_h2o_c --> 17.0*M_asp_L_c_tRNA_c+17.0*M_amp_c+17.0*M_ppi_c"
+		"tRNA_c_charging_M_cys_L_c_deGFP::2.0*M_cys_L_c+2.0*M_atp_c+2.0*tRNA_c+2.0*M_h2o_c --> 2.0*M_cys_L_c_tRNA_c+2.0*M_amp_c+2.0*M_ppi_c"
+		"tRNA_c_charging_M_glu_L_c_deGFP::14.0*M_glu_L_c+14.0*M_atp_c+14.0*tRNA_c+14.0*M_h2o_c --> 14.0*M_glu_L_c_tRNA_c+14.0*M_amp_c+14.0*M_ppi_c"
+		"tRNA_c_charging_M_gln_L_c_deGFP::8.0*M_gln_L_c+8.0*M_atp_c+8.0*tRNA_c+8.0*M_h2o_c --> 8.0*M_gln_L_c_tRNA_c+8.0*M_amp_c+8.0*M_ppi_c"
+		"tRNA_c_charging_M_gly_L_c_deGFP::20.0*M_gly_L_c+20.0*M_atp_c+20.0*tRNA_c+20.0*M_h2o_c --> 20.0*M_gly_L_c_tRNA_c+20.0*M_amp_c+20.0*M_ppi_c"
+		"tRNA_c_charging_M_his_L_c_deGFP::9.0*M_his_L_c+9.0*M_atp_c+9.0*tRNA_c+9.0*M_h2o_c --> 9.0*M_his_L_c_tRNA_c+9.0*M_amp_c+9.0*M_ppi_c"
+		"tRNA_c_charging_M_ile_L_c_deGFP::12.0*M_ile_L_c+12.0*M_atp_c+12.0*tRNA_c+12.0*M_h2o_c --> 12.0*M_ile_L_c_tRNA_c+12.0*M_amp_c+12.0*M_ppi_c"
+		"tRNA_c_charging_M_leu_L_c_deGFP::19.0*M_leu_L_c+19.0*M_atp_c+19.0*tRNA_c+19.0*M_h2o_c --> 19.0*M_leu_L_c_tRNA_c+19.0*M_amp_c+19.0*M_ppi_c"
+		"tRNA_c_charging_M_lys_L_c_deGFP::18.0*M_lys_L_c+18.0*M_atp_c+18.0*tRNA_c+18.0*M_h2o_c --> 18.0*M_lys_L_c_tRNA_c+18.0*M_amp_c+18.0*M_ppi_c"
+		"tRNA_c_charging_M_met_L_c_deGFP::5.0*M_met_L_c+5.0*M_atp_c+5.0*tRNA_c+5.0*M_h2o_c --> 5.0*M_met_L_c_tRNA_c+5.0*M_amp_c+5.0*M_ppi_c"
+		"tRNA_c_charging_M_phe_L_c_deGFP::12.0*M_phe_L_c+12.0*M_atp_c+12.0*tRNA_c+12.0*M_h2o_c --> 12.0*M_phe_L_c_tRNA_c+12.0*M_amp_c+12.0*M_ppi_c"
+		"tRNA_c_charging_M_pro_L_c_deGFP::10.0*M_pro_L_c+10.0*M_atp_c+10.0*tRNA_c+10.0*M_h2o_c --> 10.0*M_pro_L_c_tRNA_c+10.0*M_amp_c+10.0*M_ppi_c"
+		"tRNA_c_charging_M_ser_L_c_deGFP::9.0*M_ser_L_c+9.0*M_atp_c+9.0*tRNA_c+9.0*M_h2o_c --> 9.0*M_ser_L_c_tRNA_c+9.0*M_amp_c+9.0*M_ppi_c"
+		"tRNA_c_charging_M_thr_L_c_deGFP::15.0*M_thr_L_c+15.0*M_atp_c+15.0*tRNA_c+15.0*M_h2o_c --> 15.0*M_thr_L_c_tRNA_c+15.0*M_amp_c+15.0*M_ppi_c"
+		"tRNA_c_charging_M_trp_L_c_deGFP::M_trp_L_c+M_atp_c+tRNA_c+M_h2o_c --> M_trp_L_c_tRNA_c+M_amp_c+M_ppi_c"
+		"tRNA_c_charging_M_tyr_L_c_deGFP::10.0*M_tyr_L_c+10.0*M_atp_c+10.0*tRNA_c+10.0*M_h2o_c --> 10.0*M_tyr_L_c_tRNA_c+10.0*M_amp_c+10.0*M_ppi_c"
+		"tRNA_c_charging_M_val_L_c_deGFP::17.0*M_val_L_c+17.0*M_atp_c+17.0*tRNA_c+17.0*M_h2o_c --> 17.0*M_val_L_c_tRNA_c+17.0*M_amp_c+17.0*M_ppi_c"
+		"tRNA_c_exchange::[] --> tRNA_c"
+		"tRNA_c_exchange_reverse::tRNA_c --> []"
+		"PROTEIN_export_deGFP::PROTEIN_deGFP --> []"
 		"M_o2_c_exchange::[] --> M_o2_c"
 		"M_co2_c_exchange::M_co2_c --> []"
 		"M_h_c_exchange::M_h_c --> []"
@@ -1000,9 +1000,9 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_adp_exchange::[] --> M_adp_c"
 	];
 
-	# List of metabolite strings - used to write flux report
+	# List of metabolite strings - used to write flux report 
 	list_of_metabolite_symbols = [
-		"GENE_CAT"
+		"GENE_deGFP"
 		"M_10fthf_c"
 		"M_13dpg_c"
 		"M_2ddg6p_c"
@@ -1024,14 +1024,14 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_air_c"
 		"M_akg_c"
 		"M_ala_L_c"
-		"M_ala_L_c_tRNA"
+		"M_ala_L_c_tRNA_c"
 		"M_amp_c"
 		"M_arg_L_c"
-		"M_arg_L_c_tRNA"
+		"M_arg_L_c_tRNA_c"
 		"M_asn_L_c"
-		"M_asn_L_c_tRNA"
+		"M_asn_L_c_tRNA_c"
 		"M_asp_L_c"
-		"M_asp_L_c_tRNA"
+		"M_asp_L_c_tRNA_c"
 		"M_atp_c"
 		"M_cadav_c"
 		"M_cair_c"
@@ -1044,7 +1044,7 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_coa_c"
 		"M_ctp_c"
 		"M_cys_L_c"
-		"M_cys_L_c_tRNA"
+		"M_cys_L_c_tRNA_c"
 		"M_dhap_c"
 		"M_dhf_c"
 		"M_e4p_c"
@@ -1063,12 +1063,12 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_gdp_c"
 		"M_glc_D_c"
 		"M_gln_L_c"
-		"M_gln_L_c_tRNA"
+		"M_gln_L_c_tRNA_c"
 		"M_glu_L_c"
-		"M_glu_L_c_tRNA"
+		"M_glu_L_c_tRNA_c"
 		"M_glx_c"
 		"M_gly_L_c"
-		"M_gly_L_c_tRNA"
+		"M_gly_L_c_tRNA_c"
 		"M_glycoA_c"
 		"M_gmp_c"
 		"M_gtp_c"
@@ -1079,20 +1079,20 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_hco3_c"
 		"M_he_c"
 		"M_his_L_c"
-		"M_his_L_c_tRNA"
+		"M_his_L_c_tRNA_c"
 		"M_icit_c"
 		"M_ile_L_c"
-		"M_ile_L_c_tRNA"
+		"M_ile_L_c_tRNA_c"
 		"M_imp_c"
 		"M_indole_c"
 		"M_lac_D_c"
 		"M_leu_L_c"
-		"M_leu_L_c_tRNA"
+		"M_leu_L_c_tRNA_c"
 		"M_lys_L_c"
-		"M_lys_L_c_tRNA"
+		"M_lys_L_c_tRNA_c"
 		"M_mal_L_c"
 		"M_met_L_c"
-		"M_met_L_c_tRNA"
+		"M_met_L_c_tRNA_c"
 		"M_methf_c"
 		"M_mglx_c"
 		"M_mlthf_c"
@@ -1109,11 +1109,11 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_or_c"
 		"M_pep_c"
 		"M_phe_L_c"
-		"M_phe_L_c_tRNA"
+		"M_phe_L_c_tRNA_c"
 		"M_pi_c"
 		"M_ppi_c"
 		"M_pro_L_c"
-		"M_pro_L_c_tRNA"
+		"M_pro_L_c_tRNA_c"
 		"M_prop_c"
 		"M_prpp_c"
 		"M_pyr_c"
@@ -1124,30 +1124,30 @@ function DataDictionary(time_start,time_stop,time_step;)
 		"M_s7p_c"
 		"M_saicar_c"
 		"M_ser_L_c"
-		"M_ser_L_c_tRNA"
+		"M_ser_L_c_tRNA_c"
 		"M_succ_c"
 		"M_succoa_c"
 		"M_thf_c"
 		"M_thr_L_c"
-		"M_thr_L_c_tRNA"
+		"M_thr_L_c_tRNA_c"
 		"M_trp_L_c"
-		"M_trp_L_c_tRNA"
+		"M_trp_L_c_tRNA_c"
 		"M_tyr_L_c"
-		"M_tyr_L_c_tRNA"
+		"M_tyr_L_c_tRNA_c"
 		"M_udp_c"
 		"M_ump_c"
 		"M_utp_c"
 		"M_val_L_c"
-		"M_val_L_c_tRNA"
+		"M_val_L_c_tRNA_c"
 		"M_xmp_c"
 		"M_xu5p_D_c"
-		"OPEN_GENE_CAT"
-		"PROTEIN_CAT"
+		"OPEN_GENE_deGFP"
+		"PROTEIN_deGFP"
 		"RIBOSOME"
-		"RIBOSOME_START_CAT"
+		"RIBOSOME_START_deGFP"
 		"RNAP"
-		"mRNA_CAT"
-		"tRNA"
+		"mRNA_deGFP"
+		"tRNA_c"
 	];
 
 	# =============================== DO NOT EDIT BELOW THIS LINE ============================== #
