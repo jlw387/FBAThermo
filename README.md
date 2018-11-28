@@ -1,3 +1,7 @@
+CHEME 3130 Final Project Based on ACS Paper "Sequence Specific Modeling of E. coli Cell-Free Protein Synthesis"
+
+The following is the Readme file for the original paper's repository:
+
 ## Sequence Specific Flux Balance Analysis (ssFBA) for Cell-Free Protein Synthesis
 Sequence specific constraint based model (ssFBA) for static stoichiometric models (SSM) written in the [Julia](http://julialang.org) programming language.
 SSM models were created with JuNQC-Generator (https://github.com/varnerlab/JuNQC-Generator).
