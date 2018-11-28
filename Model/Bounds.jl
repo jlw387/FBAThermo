@@ -5,15 +5,31 @@ function Bounds(DF,TXTL)
   FB[195,2] = DF["Oxygen"]; #[]-> O2
   FB[207,2] = DF["GlcUptake"]; #[]-> GLC
   FB[211,2] = 0; #[]-> PYR
-  FB[214:217,2]= 0; #succ, Mal, fum, etoh, mglx
-  FB[224:2:262,2] = DF["AAUptake"]; #AA UPTAKE
-  FB[225:2:263,2] = DF["AASecretion"]; #AA ->[]
+  println("Check1")
+  i = 214
+  for i = 214:217
+    FB[i,2]= 0; #succ, Mal, fum, etoh, mglx
+  end
+  println("Check2")
+  i = 112
+  for i = 112:131
+    FB[2*i,2] = DF["AAUptake"]; #AA UPTAKE
+    FB[(2*i+1),2] = DF["AASecretion"]; #AA ->[]
+  end
+  println("Check3")
   FB[264,2] = 0; #ATP ->[]
   FB[265,2] = 0; #[]-> ADP
   AASyn = TXTL["AA_synthesis_rxn"]
   AADeg = TXTL["AA_degradation_rxn"]
-  FB[AASyn,2] = DF["AASyn"];
-  FB[AADeg,2] = 0;
+  println("Check4")
+  for i = AASyn[1]:AASyn[end]
+    FB[i,2] = DF["AASyn"];
+  end
+  println("Check5")
+  for i = AADeg[1]:AADeg[end]
+    FB[i,2] = 0;
+  end
+  println("Check6")
 #==============================================TXTL=====================================================#
   RNAP_concentration_nM = TXTL["RNAP_concentration_nM"];
   RNAP_elongation_rate = TXTL["RNAP_elongation_rate"];

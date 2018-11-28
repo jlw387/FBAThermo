@@ -6,6 +6,8 @@ include("TXTLDictionary.jl")
 data_dictionary = DataDictionary(0,0,0)
 TXTL_dictionary = TXTLDictionary(0,0,0)
 
+println("Dictionaries Set Up")
+
 #Set objective reaction
 data_dictionary["objective_coefficient_array"][194] = -1;
 
