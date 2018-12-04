@@ -28,19 +28,25 @@
 # Generated on: 2017-05-02T17:02:18.094
 #
 # Input arguments:
-# time_start::Float64 => Simulation start time value (scalar) 
-# time_stop::Float64 => Simulation stop time value (scalar) 
-# time_step::Float64 => Simulation time step (scalar) 
+# time_start::Float64 => Simulation start time value (scalar)
+# time_stop::Float64 => Simulation stop time value (scalar)
+# time_step::Float64 => Simulation time step (scalar)
 #
 # Output arguments:
-# data_dictionary::Dict{AbstractString,Any} => Dictionary holding model and simulation parameters as key => value pairs 
+# data_dictionary::Dict{AbstractString,Any} => Dictionary holding model and simulation parameters as key => value pairs
 # ----------------------------------------------------------------------------------- #
 function DataDictionary(time_start,time_stop,time_step)
 
-	# Load the stoichiometric network from disk - 
+	# Load the stoichiometric network from disk -
 	stoichiometric_matrix = readdlm("Network.dat");
 
-	# Setup default flux bounds array - 
+	#Set up further constraints
+	forward_reverse_constraints = zeros(Float64,1,265);
+	forward_reverse_constraints[1,2] = 1;
+	forward_reverse_constraints[1,3] = -(127.4/67.9);
+	stoichiometric_matrix = [stoichiometric_matrix;forward_reverse_constraints]
+
+	# Setup default flux bounds array -
 	default_bounds_array = [
 		0	100.0	;	# 1 M_atp_c+M_glc_D_c --> M_adp_c+M_g6p_c
 		0	100.0	;	# 2 M_g6p_c --> M_f6p_c
@@ -309,7 +315,7 @@ function DataDictionary(time_start,time_stop,time_step)
 		0	100.0	;	# 265 [] --> M_adp_c
 	];
 
-	# Setup default species bounds array - 
+	# Setup default species bounds array -
 	species_bounds_array = [
 		0.0	0.0	;	# 1 GENE_deGFP
 		0.0	0.0	;	# 2 M_10fthf_c
@@ -459,7 +465,7 @@ function DataDictionary(time_start,time_stop,time_step)
 		0.0	0.0	;	# 146 tRNA_c
 	];
 
-	# Setup the objective coefficient array - 
+	# Setup the objective coefficient array -
 	objective_coefficient_array = [
 		0.0	;	# 1 R_glk_atp::M_atp_c+M_glc_D_c --> M_adp_c+M_g6p_c
 		0.0	;	# 2 R_pgi::M_g6p_c --> M_f6p_c
@@ -728,10 +734,10 @@ function DataDictionary(time_start,time_stop,time_step)
 		0.0	;	# 265 M_adp_exchange::[] --> M_adp_c
 	];
 
-	# Min/Max flag - default is minimum - 
+	# Min/Max flag - default is minimum -
 	is_minimum_flag = true
 
-	# List of reation strings - used to write flux report 
+	# List of reation strings - used to write flux report
 	list_of_reaction_strings = [
 		"R_glk_atp::M_atp_c+M_glc_D_c --> M_adp_c+M_g6p_c"
 		"R_pgi::M_g6p_c --> M_f6p_c"
@@ -1000,7 +1006,7 @@ function DataDictionary(time_start,time_stop,time_step)
 		"M_adp_exchange::[] --> M_adp_c"
 	];
 
-	# List of metabolite strings - used to write flux report 
+	# List of metabolite strings - used to write flux report
 	list_of_metabolite_symbols = [
 		"GENE_deGFP"
 		"M_10fthf_c"

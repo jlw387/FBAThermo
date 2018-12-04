@@ -95,7 +95,7 @@ end
 
 # Setup problem constraints for the metabolites -
 species_bounds_array = data_dictionary["species_bounds_array"]
-for species_index = 1:number_of_species
+for species_index = 1:(number_of_species - 1)
 
 	species_lower_bound = species_bounds_array[species_index,1]
 	species_upper_bound = species_bounds_array[species_index,2]
