@@ -41,9 +41,34 @@ function DataDictionary(time_start,time_stop,time_step)
 	stoichiometric_matrix = readdlm("Network.dat");
 
 	#Set up further constraints
-	forward_reverse_constraints = zeros(Float64,1,265);
-	forward_reverse_constraints[1,2] = 1;
-	forward_reverse_constraints[1,3] = -(127.4/67.9);
+	forward_reverse_constraints_num = 12;
+	forward_reverse_constraints = zeros(Float64,forward_reverse_constraints_num,265);
+
+	forward_reverse_constraints[1,2] = 1; 					#PGI_F
+	forward_reverse_constraints[1,3] = -(127.4/67.9); 		#PGI_R
+	forward_reverse_constraints[2,4] = 1;					#PFK_F
+	forward_reverse_constraints[2,5] = -(66.0/3.1);			#PFK_R
+	forward_reverse_constraints[3,6] = 1;					#FBA_F
+	forward_reverse_constraints[3,7] = -(117.5/54.6);		#FBA_R
+	forward_reverse_constraints[4,8] = 1;					#TPI_F
+	forward_reverse_constraints[4,9] = -(236.7/174.4);		#TPI_R
+	forward_reverse_constraints[5,27] = 1;					#RPE_F
+	forward_reverse_constraints[5,28] = -(120.9/124.7);		#RPE_R
+	forward_reverse_constraints[6,29] = 1;					#RPI_R
+	forward_reverse_constraints[6,30] = -(5030.9/5038.7);	#RPI_F
+	forward_reverse_constraints[7,31] = 1;					#TAL_F
+	forward_reverse_constraints[7,32] = -(3.3/0.4);			#TAL_R
+	forward_reverse_constraints[8,33] = 1;					#TKT1_F
+	forward_reverse_constraints[8,34] = -(19.9/17.1);		#TKT1_R
+	forward_reverse_constraints[9,35] = 1;					#TKT2_F
+	forward_reverse_constraints[9,36] = -(19.5/1.8);		#TKT_R
+	forward_reverse_constraints[10,44] = 1;					#AKGDH_F
+	forward_reverse_constraints[10,45] = -(19.5/1.8);		#AKDGH_R
+	forward_reverse_constraints[11,48] = 1;					#FUM_F
+	forward_reverse_constraints[11,49] = -(5615.6/5597.4);	#FUM_R
+	forward_reverse_constraints[12,50] = 1;					#MDH_F
+	forward_reverse_constraints[12,51] = -(105.2/86.3);		#MDH_R
+
 	stoichiometric_matrix = [stoichiometric_matrix;forward_reverse_constraints]
 
 	# Setup default flux bounds array -
@@ -1166,5 +1191,6 @@ function DataDictionary(time_start,time_stop,time_step)
 	data_dictionary["list_of_metabolite_symbols"] = list_of_metabolite_symbols
 	data_dictionary["is_minimum_flag"] = is_minimum_flag
 	# =============================== DO NOT EDIT ABOVE THIS LINE ============================== #
+	data_dictionary["forward_reverse_constraints_num"] = forward_reverse_constraints_num
 	return data_dictionary
 end
