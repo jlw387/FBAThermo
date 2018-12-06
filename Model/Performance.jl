@@ -11,7 +11,6 @@ Efficiency = (flux_array[194,:]*900+flux_array[168,:]*1356)./(ATP)*100
 Productivity = flux_array[194,:]*1e3
 
 println("Reaction: PGI\t Expected: "*string(127.4/67.9)*"\t Actual: "*string(flux_array[2]/flux_array[3]))
-println("Reaction: PFK\t Expected: "*string(66.0/3.1)*"\t Actual: "*string(flux_array[4]/flux_array[5]))
 println("Reaction: FBA\t Expected: "*string(117.5/54.6)*"\t Actual: "*string(flux_array[6]/flux_array[7]))
 println("Reaction: TPI\t Expected: "*string(236.7/174.4)*"\t Actual: "*string(flux_array[8]/flux_array[9]))
 println("Reaction: RPE\t Expected: "*string(124.7/120.9)*"\t Actual: "*string(flux_array[27]/flux_array[28]))
