@@ -1,7 +1,11 @@
 function Bounds(DF,TXTL)
 
   FB = DF["default_flux_bounds_array"]
-
+  FB[2,1] = 0.1
+  FB[31,1] = 0.1
+  FB[44,1] = 0.1
+  FB[48,1] = 0.1
+  FB[50,1] = 0.1
   FB[195,2] = DF["Oxygen"]; #[]-> O2
   FB[207,2] = DF["GlcUptake"]; #[]-> GLC
   FB[211,2] = 0; #[]-> PYR
@@ -22,7 +26,7 @@ function Bounds(DF,TXTL)
     FB[i,2] = DF["AASyn"];
   end
   for i = AADeg[1]:AADeg[end]
-    FB[i,2] = 0;
+    FB[i,2] = 100;
   end
 #==============================================TXTL=====================================================#
   RNAP_concentration_nM = TXTL["RNAP_concentration_nM"];

@@ -95,7 +95,7 @@ end
 
 # Setup problem constraints for the metabolites -
 species_bounds_array = data_dictionary["species_bounds_array"]
-for species_index = 1:(number_of_species-data_dictionary["forward_reverse_constraints_num"])
+for species_index = 1:(number_of_species)
 
 	species_lower_bound = species_bounds_array[species_index,1]
 	species_upper_bound = species_bounds_array[species_index,2]
@@ -115,11 +115,6 @@ for species_index = 1:(number_of_species-data_dictionary["forward_reverse_constr
 
 end
 
-#Set up further problem constraints
-for i = 1:data_dictionary["forward_reverse_constraints_num"]
-	GLPK.set_row_name(lp_problem, (146 + i), "fr_"*string(i));
-end
-
 # Setup the stoichiometric array -
 counter = 1;
 row_index_array = zeros(Int,number_of_species*number_of_fluxes);
@@ -137,6 +132,7 @@ for species_index in species_index_vector
 end
 
 GLPK.load_matrix(lp_problem, number_of_species*number_of_fluxes, row_index_array, col_index_array, flat_stoichiometric_array);
+writedlm("Problem_Matrix.txt",stoichiometric_matrix);
 
 # Set solver parameters
 solver_parameters = GLPK.SimplexParam();
@@ -147,7 +143,7 @@ GLPK.init_smcp(solver_parameters);
 # Call the solver -
 exit_flag = GLPK.simplex(lp_problem, solver_parameters);
 
-GLPK.print_sol(lp_problem, "SolutionText");
+GLPK.print_sol(lp_problem, "SolutionText.txt");
 
 # Get the objective function value -
 objective_value = GLPK.get_obj_val(lp_problem);

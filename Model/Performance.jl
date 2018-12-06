@@ -16,7 +16,7 @@ println("Reaction: FBA\t Expected: "*string(117.5/54.6)*"\t Actual: "*string(flu
 println("Reaction: TPI\t Expected: "*string(236.7/174.4)*"\t Actual: "*string(flux_array[8]/flux_array[9]))
 println("Reaction: RPE\t Expected: "*string(124.7/120.9)*"\t Actual: "*string(flux_array[27]/flux_array[28]))
 println("Reaction: RPI\t Expected: "*string(5030.9/5038.7)*"\t Actual: "*string(flux_array[29]/flux_array[30]))
-println("Reaction: TAL\t Expected: "*string(3.3/0.4)*"\t Actual: "*string(flux_array[31]/flux_array[33]))
+println("Reaction: TAL\t Expected: "*string(3.3/0.4)*"\t Actual: "*string(flux_array[31]/flux_array[32]))
 println("Reaction: TKT1\t Expected: "*string(19.9/17.1)*"\t Actual: "*string(flux_array[33]/flux_array[34]))
 println("Reaction: TKT2\t Expected: "*string(2.0/1.1)*"\t Actual: "*string(flux_array[35]/flux_array[36]))
 println("Reaction: AKGDH\t Expected: "*string(19.5/1.8)*"\t Actual: "*string(flux_array[44]/flux_array[45]))

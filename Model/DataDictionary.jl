@@ -53,7 +53,7 @@ function DataDictionary(time_start,time_stop,time_step)
 	forward_reverse_constraints[4,8] = 1;					#TPI_F
 	forward_reverse_constraints[4,9] = -(236.7/174.4);		#TPI_R
 	forward_reverse_constraints[5,27] = 1;					#RPE_F
-	forward_reverse_constraints[5,28] = -(120.9/124.7);		#RPE_R
+	forward_reverse_constraints[5,28] = -(124.7/120.9);		#RPE_R
 	forward_reverse_constraints[6,29] = 1;					#RPI_R
 	forward_reverse_constraints[6,30] = -(5030.9/5038.7);	#RPI_F
 	forward_reverse_constraints[7,31] = 1;					#TAL_F
@@ -61,7 +61,7 @@ function DataDictionary(time_start,time_stop,time_step)
 	forward_reverse_constraints[8,33] = 1;					#TKT1_F
 	forward_reverse_constraints[8,34] = -(19.9/17.1);		#TKT1_R
 	forward_reverse_constraints[9,35] = 1;					#TKT2_F
-	forward_reverse_constraints[9,36] = -(19.5/1.8);		#TKT_R
+	forward_reverse_constraints[9,36] = -(2.0/1.1);			#TKT2_R
 	forward_reverse_constraints[10,44] = 1;					#AKGDH_F
 	forward_reverse_constraints[10,45] = -(19.5/1.8);		#AKDGH_R
 	forward_reverse_constraints[11,48] = 1;					#FUM_F
@@ -488,6 +488,18 @@ function DataDictionary(time_start,time_stop,time_step)
 		0.0	0.0	;	# 144 RNAP
 		0.0	0.0	;	# 145 mRNA_deGFP
 		0.0	0.0	;	# 146 tRNA_c
+		0.0 0.0 ;   # 147 fr_1
+		0.0 0.0 ;   # 148 fr_2
+		0.0 0.0 ;   # 149 fr_3
+		0.0 0.0 ;   # 150 fr_4
+		0.0 0.0 ;   # 151 fr_5
+		0.0 0.0 ;   # 152 fr_6
+		0.0	0.0	;	# 153 fr_7
+		0.0 0.0 ;   # 154 fr_8
+		0.0 0.0 ;   # 155 fr_9
+		0.0 0.0 ;   # 156 fr_10
+		0.0 0.0 ;   # 157 fr_11
+		0.0 0.0 ;   # 158 fr_12
 	];
 
 	# Setup the objective coefficient array -
@@ -1179,6 +1191,18 @@ function DataDictionary(time_start,time_stop,time_step)
 		"RNAP"
 		"mRNA_deGFP"
 		"tRNA_c"
+		"ForRev_1"
+		"ForRev_2"
+		"ForRev_3"
+		"ForRev_4"
+		"ForRev_5"
+		"ForRev_6"
+		"ForRev_7"
+		"ForRev_8"
+		"ForRev_9"
+		"ForRev_10"
+		"ForRev_11"
+		"ForRev_12"
 	];
 
 	# =============================== DO NOT EDIT BELOW THIS LINE ============================== #
